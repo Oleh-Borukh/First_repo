@@ -1,20 +1,33 @@
 # Realization of Cezar's Cypher
 # to_encrypt() function encrypt text
-# to_decrypt() function decrypt text 
+# to_decrypt() function decrypt text
+
 
 def to_encrypt(text: str(), key: int()):
     encrypted_text = ""
     for char in text:
-        new_pos = ord(char) + key
-        encrypted_text += chr(new_pos)
+        if char.isupper():
+            new_pos = ((ord(char) % ord('A') + key) % 26) + ord("A")
+            encrypted_text += chr(new_pos)
+        elif char.islower():
+            new_pos = ((ord(char) % ord('a') + key) % 26) + ord("a")
+            encrypted_text += chr(new_pos)
+        else:
+            encrypted_text += char
     return encrypted_text
 
 
 def to_decrypt(encrypted_text: str(), key: int()):
     decrypted_text = ""
     for char in encrypted_text:
-        new_pos = ord(char) - key
-        decrypted_text += chr(new_pos)
+        if char.isupper():
+            new_pos = ((ord(char) % ord('A') - key) % 26) + ord("A")
+            decrypted_text += chr(new_pos)
+        elif char.islower():
+            new_pos = ((ord(char) % ord('a') - key) % 26) + ord("a")
+            decrypted_text += chr(new_pos)
+        else:
+            decrypted_text += char
     return decrypted_text
 
 
